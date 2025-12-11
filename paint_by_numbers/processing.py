@@ -98,7 +98,7 @@ def _fill_holes(id_map: np.ndarray, hole_value: int = -1) -> np.ndarray:
     """
     fixed_map = id_map.copy()
     mask_bad = (fixed_map == hole_value)
-    kernel = np.ones((3, 3), np.uint8)
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
 
     while np.any(mask_bad):
         # Dilate valid IDs into the holes
