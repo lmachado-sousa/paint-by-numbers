@@ -32,10 +32,6 @@ def generate_borders(image: np.ndarray, palette: np.ndarray,
         mask = cv2.inRange(image, color, color)
         id_map[mask > 0] = i
 
-    # Smooth before edge detection
-    if smoothing_size > 0 and smoothing_size % 2 == 1:
-        id_map = cv2.medianBlur(id_map, smoothing_size)
-
     # Morph Gradient
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
     edges = cv2.morphologyEx(id_map, cv2.MORPH_GRADIENT, kernel)
